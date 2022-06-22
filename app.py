@@ -10,6 +10,7 @@ from flask import Flask, make_response, request, redirect, url_for, send_from_di
 import pandas as pd
 import charges.charges as charges
 import computer.computer as computer
+import sales.sales
 import triangle.triangle as triangle
 import thecalendar.thecalendar as thecalendar
 from flask_cors import CORS
@@ -95,6 +96,32 @@ def question4():
             df.loc[i, 6] = "未通过测试"
         else:
             df.loc[i, 6] = "通过测试"
+
+    da = json.dumps(df.to_dict(orient='records'))
+
+    response = make_response(da)
+
+    return response
+
+
+@app.route('/question6', methods=['POST', 'GET'])
+def question6():
+    file = request.files['file']
+    file.save(os.getcwd() + '/' + file.filename)
+    df = pd.read_csv(file.filename, sep=',', header=None)
+    df[6] = 0
+    df[7] = 0
+    df[8] = 0
+    for i in range(df.shape[0]):
+        df.loc[i, 6] = sales.sales.sales_atom([df[1][i], df[2][i], df[3][i]])
+        df.loc[i, 7] = sales.sales.sales_atom_1([df[1][i], df[2][i], df[3][i]])
+        if str(df[4][i]) != str(df[6][i]):
+            df.loc[i, 8] = "未通过测试"
+        else:
+            if str(df[5][i]) != str(df[7][i]):
+                df.loc[i, 8] = "未通过测试"
+            else:
+                df.loc[i, 8] = "通过测试"
 
     da = json.dumps(df.to_dict(orient='records'))
 

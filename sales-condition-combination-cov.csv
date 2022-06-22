@@ -1,0 +1,15 @@
+0,230,3,0.7,7,32.86,7,32.86
+1,230,3,0.5,no commission,no commission,no commission,no commission
+2,230,11,0.7,6,38.33,6,38.33
+3,230,11,0.9,5,46,5,46
+4,180,3,0.7,6,30,6,30
+5,180,3,0.9,5,36,5,36
+6,180,11,0.7,6,30,6,30
+7,180,11,0.9,5,36,5,36
+8,-100,-3,-0.1,error,error,error,error
+9,-100,-3,0.1,error,error,error,error
+10,-100,3,0.1,error,error,error,error
+11,-100,3,-0.1,error,error,error,error
+12,100,-3,-0.1,error,error,error,error
+13,100,-3,-0.1,error,error,error,error
+14,100,3,-0.1,error,error,error,error
