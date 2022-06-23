@@ -14,32 +14,51 @@ class SaleSystem:
     reward = 0  # 佣金
 
     def condition(self):
+        if self.zj_num < 0 or self.xsq_num < 0 or self.ws_num < 0:
+            if self.zj_num < 0 and self.zj_num!=-1:
+                print("M销售值不能为负")
+            if self.zj_num==-1:
+                print("系统自动统计销售总额")
+            if self.xsq_num < 0:
+                print("I销售值不能为负")
+            if self.ws_num < 0:
+                print("P销售值不能为负")
+            return False
         if self.zj_num < self.min_num or self.xsq_num < self.min_num or self.ws_num < self.min_num:
-            print("Each salesman sells at least one complete machine per month!")
+            print("每月应至少销售一台完整机器！")
             return False
         if self.zj_num > self.zj_max:
-            print("The number of hosts sold exceeds the limit")
+            print("M的值超出范围")
             return False
         if self.xsq_num > self.xsq_max:
-            print("The number of monitors sold exceeds the limit")
+            print("I的值超出范围")
             return False
         if self.ws_num > self.ws_max:
-            print("The number of peripherals sold exceeds the limit")
+            print("P的值超出范围")
             return False
         return True
 
     def conditionstr(self):
+        if self.zj_num < 0 or self.xsq_num < 0 or self.ws_num < 0:
+            if self.zj_num < 0 and self.zj_num!=-1:
+                return "M销售值不能为负";
+            if self.zj_num==-1:
+                return "系统自动统计销售总额";
+            if self.xsq_num < 0:
+                return "I销售值不能为负";
+            if self.ws_num < 0:
+                return "P销售值不能为负";
         if self.zj_num < self.min_num or self.xsq_num < self.min_num or self.ws_num < self.min_num:
-            return "Each salesman sells at least one complete machine per month!"
+            return "每月应至少销售一台完整机器！"
 
         if self.zj_num > self.zj_max:
-            return "The number of hosts sold exceeds the limit"
+            return "M的值超出范围"
 
         if self.xsq_num > self.xsq_max:
-            return "The number of monitors sold exceeds the limit"
+            return "I的值超出范围"
 
         if self.ws_num > self.ws_max:
-            return "The number of peripherals sold exceeds the limit"
+            return "P的值超出范围"
 
     def calculatedSales(self):
         self.sales = self.zj_num * self.zj_price + self.xsq_num * \
@@ -65,7 +84,15 @@ def compute(num1, num2, num3):
     # 输入，主机为-1终止
 
     if num1 < -1 or num2 < 0 or num3 < 0:
-        return "Sales volume cannot be negative"
+        if num1 < 0 and num1!=-1:
+            return "M销售值不能为负";
+        if num1==-1:
+            return "系统自动统计销售总额";
+        if num2 < 0:
+            return "I销售值不能为负";
+        if num3 < 0:
+            return "P销售值不能为负";
+        # return "Sales volume cannot be negative"
 
     saleSystem.zj_num += num1
     saleSystem.xsq_num += num2

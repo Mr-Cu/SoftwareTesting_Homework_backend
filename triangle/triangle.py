@@ -4,32 +4,32 @@ import decimal
 class Triangle:
     def type(self, a, b, c):
         if a == 0:
-            return "a can't be 0"
+            return "a不能为0"
         if b == 0:
-            return "b can't be 0"
+            return "b不能为0"
         if c == 0:
-            return "c can't be 0"
+            return "c不能为0"
         if a < 0:
-            return "a can't < 0"
+            return "a不能小于0"
         if b < 0:
-            return "b can't < 0"
+            return "b不能小于0"
         if c < 0:
-            return "c can't < 0"
-        if a >= 800:
-            return "a is not in the range of value"
-        if b >= 800:
-            return "b is not in the range of value"
-        if c >= 800:
-            return "c is not in the range of value"
+            return "c不能小于0"
+        if a > 800:
+            return "a超出取值范围"
+        if b > 800:
+            return "b超出取值范围"
+        if c > 800:
+            return "c超出取值范围"
         if a + c > b and a + b > c and c + b > a:
             if a == b == c:
-                return "Equilateral triangle"
+                return "等边三角形"
             elif a == b or b == c or a == c:
-                return "Isosceles triangle"
+                return "等腰三角形"
             else:
-                return "Normal triangle"
+                return "普通三角形"
         else:
-            return "Not triangle"
+            return "不是三角形"
 
 
 def compute(a, b, c):

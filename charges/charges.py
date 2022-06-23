@@ -26,14 +26,16 @@ class ChargeSystem:
         return True
 
     def conditionstr(self):
+        if self.missed_payments-self.missed_payments//1!=0:
+            return "未按时缴费次数不能为小数"
         if self.phone_time < 0:
-            return "The number of minutes of calls cannot be less than 0"
+            return "通话时间不能小于0"
         if self.missed_payments < 0:
-            return "The times of not paying on time cannot be less than 0"
+            return "未按时缴费次数不能小于0"
         if self.phone_time > 44640:
-            return "Call minutes exceed maximum time limit"
-        if self.missed_payments > 11:
-            return "The times of not paying on time cannot be greater than the maximum times"
+            return "通话时间超出最大范围"
+        if self.missed_payments > 12:
+            return "未按时缴费次数不能大于12"
 
     def calculatedFee(self):
         if 0 <= self.phone_time <= 60 and self.missed_payments <= 1:

@@ -11,14 +11,24 @@ import datetime
 def calendar_atom(arg_list):
     v_list_new = [str(x) for x in arg_list]
     year, month, day = arg_list[0], arg_list[1], arg_list[2]
-    if (year < 2000 or year > 2100) and (month < 1 or month > 12) and (day < 1 or day > 31):
+    if (year < 1901 or year > 2049) and (month < 1 or month > 12) and (day < 1 or day > 31):
         return 'Illegal Case'
-    if year < 2000 or year > 2100:
-        return 'Year Exceed'
+    if year < 1901 or year > 2049:
+        return '年不在范围之内'
     if month < 1 or month > 12:
-        return 'Month Exceed'
+        return '月不在范围之内'
+
+    if day==29:
+        if month==2 and not ((year % 4 == 0 and year % 100 != 0) or (year % 400 == 0)):
+            return '日不在范围之内'
+    if day==30:
+        if month==2:
+            return '日不在范围之内'
+    if day==31:
+        if (month == 4 or month == 6 or month == 9 or month == 11 or month==2):
+            return '日不在范围之内'
     if day < 1 or day > 31:
-        return 'Day Exceed'
+        return '日不在范围之内'
     try:
         _date = datetime.datetime.strptime('-'.join(v_list_new), '%Y-%m-%d').date()
     except Exception as e:
