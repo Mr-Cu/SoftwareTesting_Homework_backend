@@ -8,6 +8,8 @@ import json
 import os
 from flask import Flask, make_response, request, redirect, url_for, send_from_directory
 import pandas as pd
+
+import atmsystem.atmsystem
 import charges.charges as charges
 import computer.computer as computer
 import sales.sales
@@ -96,6 +98,27 @@ def question4():
             df.loc[i, 6] = "未通过测试"
         else:
             df.loc[i, 6] = "通过测试"
+
+    da = json.dumps(df.to_dict(orient='records'))
+
+    response = make_response(da)
+
+    return response
+
+
+@app.route('/question5', methods=['POST', 'GET'])
+def question5():
+    file = request.files['file']
+    file.save(os.getcwd() + '/' + file.filename)
+    df = pd.read_csv(file.filename, sep=',', header=None)
+    df[3] = 0
+    df[4] = 0
+    for i in range(df.shape[0]):
+        df.loc[i, 3] = atmsystem.atmsystem.printer_atom([df[1][i]])
+        if str(df[2][i]) != str(df[3][i]):
+            df.loc[i, 4] = "未通过测试"
+        else:
+            df.loc[i, 4] = "通过测试"
 
     da = json.dumps(df.to_dict(orient='records'))
 
