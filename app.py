@@ -141,7 +141,7 @@ def question6():
         if str(df[4][i]) != str(df[6][i]):
             df.loc[i, 8] = "未通过测试"
         else:
-            if df[5][i] != "no commission" and df[5][i] != "error":
+            if df[5][i] != "没有输出值" and df[5][i] != "输入超出范围":
                 tmp = float(df[5][i])
             else:
                 tmp = df[5][i]
